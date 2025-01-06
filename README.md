@@ -4,7 +4,7 @@
 A web application designed to help users submit, search, and claim lost items. This repository contains the backend API, with the frontend under development.
 
 ----------
-![Lost And Found Logo](lost_and_found.webp"Lost_And_Found")
+![Lost And Found Logo](Lost_and_found.webp "Lost_And_Found")
 ----------
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ## Project Structure
