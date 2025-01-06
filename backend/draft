@@ -1,0 +1,25 @@
+To test your API in Postman, follow these steps:
+
+1. **Start your server**: Make sure your server is running by executing `node /home/kali/Documents/Projects/LostAndFound/backend/server.js` in your terminal.
+
+2. **Open Postman**: Launch Postman on your computer.
+
+3. **Create a new request**:
+    - Click on the "New" button and select "Request".
+    - Name your request and save it to a collection if you want.
+
+4. **Set up the request**:
+    - **Method**: Choose the HTTP method (GET, POST, PUT, DELETE) based on the endpoint you want to test.
+    - **URL**: Enter the URL of your API endpoint. For example, to test the home route, use `http://localhost:5000/`.
+
+5. **Add headers (if needed)**: If your API requires specific headers (like `Content-Type` or `Authorization`), add them in the "Headers" tab.
+
+6. **Add body (if needed)**: For POST or PUT requests, add the request body in the "Body" tab. Choose the appropriate format (e.g., JSON) and enter your data.
+
+7. **Send the request**: Click the "Send" button to send the request to your API.
+
+8. **Check the response**: Look at the response section to see the status code, response body, and headers returned by your API.
+
+For example, to test the home route, set up a GET request to `http://localhost:5000/` and click "Send". You should see a response with the message "Welcome to Lost and Found API! 👋".
+
+To test the `/api/items` route, you can create a POST request with a JSON body containing the item details and send it to `http://localhost:5000/api/items`.
