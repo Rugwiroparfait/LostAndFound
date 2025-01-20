@@ -1,6 +1,3 @@
-Here's an enhanced version of your README with more detailed information:
-
-----------
 
 # Lost and Found System
 
