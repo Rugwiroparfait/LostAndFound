@@ -1,220 +1,151 @@
+Here's an enhanced version of your README with more detailed information:
+
+----------
 
 # Lost and Found System
 
-A web application designed to help users submit, search, and claim lost items. This repository contains the backend API, with the frontend under development.
+The **Lost and Found System** is a web application designed to help users easily submit, search, and claim lost items. Whether you’ve misplaced an item or found something, this platform allows seamless interaction for submitting and managing lost and found items.
+
+This repository contains the **backend API** of the application, which is built using Django and structured for scalability, security, and ease of use.
+
+![Lost And Found Logo](Lost_and_found.webp  "Lost_And_Found")
+
+![License](https://img.shields.io/badge/license-MIT-green.svg)
 
 ----------
-![Lost And Found Logo](Lost_and_found.webp "Lost_And_Found")
+
+## Features
+
+-   **Submit Lost Items:** Users can register items they’ve lost, providing a detailed description and relevant details.
+-   **Search for Lost Items:** Users can search for lost items based on various filters such as type, location, and date.
+-   **Claim Found Items:** Users who have found an item can claim ownership or report it through the system.
+-   **Item Tracking:** Items can be tracked through their status and location history.
+-   **User Authentication:** Secure login and registration features for both claimants and owners.
+
 ----------
-![License](https://img.shields.io/badge/license-MIT-green.svg)
+
 ## Project Structure
 
-```
-lost-and-found/
-├── backend/
-│   ├── src/
-│   │   ├── config/
-│   │   │   ├── database.js     # Database configuration
-│   │   │   └── config.js       # App configuration
-│   │   ├── controllers/
-│   │   │   └── itemController.js # Handles item-related API logic
-│   │   ├── middleware/
-│   │   │   ├── errorHandler.js  # Error handling middleware
-│   │   │   └── validation.js    # Input validation middleware
-│   │   ├── models/
-│   │   │   └── Item.js          # Mongoose schema for lost items
-│   │   ├── routes/
-│   │   │   └── itemRoutes.js    # API routes for item-related endpoints
-│   │   └── app.js               # Express app setup and middlewares
-│   ├── .env.example             # Example environment variables file
-│   ├── package.json             # Backend dependencies and scripts
-│   └── server.js                # Entry point for the backend server
-├── frontend/                    # (Coming soon)
-│   ├── src/
-│   │   ├── components/          # React components (ItemCard, SearchBar, ItemForm)
-│   │   ├── services/            # API integration logic
-│   │   ├── utils/               # Utility functions
-│   │   ├── App.jsx              # Main React app component
-│   │   └── main.jsx             # React entry point
-│   ├── .env.example             # Example environment variables for frontend
-│   └── package.json             # Frontend dependencies and scripts
-└── README.md                    # Project documentation
+The project follows the standard Django structure with clear separation of concerns into different apps for modularity:
 
 ```
+lost_and_found/
+├── manage.py            # Django command-line utility for administrative tasks
+├── requirements.txt      # Python dependencies
+├── .env.example          # Sample environment variables
+├── lost_and_found/
+│   ├── __init__.py       # Django app initialization
+│   ├── settings.py       # Project settings
+│   ├── urls.py           # URL routing configuration
+│   └── wsgi.py           # WSGI entry-point for deployment
+└── apps/                  # Core application modules
+    ├── users/             # User management (authentication)
+    │   ├── __init__.py    # App initialization
+    │   ├── models.py      # User models
+    │   ├── serializers.py # Serialization for user data
+    │   ├── views.py       # User-related views
+    │   └── urls.py        # User URL routing
+    ├── items/             # Lost and found items management
+    │   ├── __init__.py    # App initialization
+    │   ├── models.py      # Item models
+    │   ├── serializers.py # Serialization for item data
+    │   ├── views.py       # Item-related views
+    │   └── urls.py        # Item URL routing
+    └── claims/            # Claims related to found items
+        ├── __init__.py    # App initialization
+        ├── models.py      # Claim models
+        ├── serializers.py # Serialization for claim data
+        ├── views.py       # Claim-related views
+        └── urls.py        # Claim URL routing
+
+```
+
+----------
+
+## System Architecture
+
+The system is designed with modularity in mind, with a clear separation between the user management, items, and claims functionality. Each component interacts with the others to ensure smooth data flow and interactions.
+
+![Lost And Found Logo](LostAndFoundSystemArchitecture.png  "Lost_And_Found")
+
+----------
+
+## Data Models
+
+The core data models for the system include Users, Items, and Claims. These models ensure that the platform is capable of storing and retrieving the necessary information for lost and found processes.
+
+-   **User Model:** Handles user registration, authentication, and roles.
+-   **Item Model:** Stores details of lost and found items.
+-   **Claim Model:** Manages the process of users claiming found items.
+
+![Lost And Found Logo](LostAndFoundDataModels.png  "Lost_And_Found")
+
+----------
+
+## Requirements
+
+-   Python 3.8+
+-   Django 4.x
+-   PostgreSQL (recommended for production)
+-   Other dependencies listed in `requirements.txt`
 
 ----------
 
 ## Setup Instructions
 
-### Prerequisites
-
-Make sure you have the following installed:
-
--   **Node.js** (v14 or higher)
--   **MongoDB** (local or MongoDB Atlas)
--   **npm** or **yarn** for managing dependencies
-
-### Backend Setup
-
-1.  **Clone the repository**:
+1.  **Clone the repository:**
     
     ```bash
-    git clone https://github.com/Rugwiroparfait/LostAndFound.git
-    cd LostAndFound/backend
+    git clone https://github.com/Rugwiroparfait/lost-and-found-system.git
+    cd lost-and-found-system
     
     ```
     
-2.  **Install dependencies**:
+2.  **Set up virtual environment (optional but recommended):**
     
     ```bash
-    npm install
+    python3 -m venv venv
+    source venv/bin/activate  # On Windows: venv\Scripts\activate
     
     ```
     
-3.  **Create a `.env` file**: Copy the example `.env.example` file and create your own `.env` file:
+3.  **Install dependencies:**
     
     ```bash
-    cp .env.example .env
+    pip install -r requirements.txt
     
     ```
     
-4.  **Configure your environment**: Update the `.env` file with your MongoDB URI and port:
+4.  **Configure environment variables:**
     
-    ```env
-    MONGODB_URI=mongodb://localhost:27017/lost-and-found  # or use MongoDB Atlas URI
-    PORT=5000
+    Copy `.env.example` to `.env` and adjust settings like the database URL and secret keys.
     
-    ```
-    
-5.  **Start the server**:
+5.  **Run migrations:**
     
     ```bash
-    npm run dev
+    python manage.py migrate
     
     ```
     
-    The backend API should now be running at `http://localhost:5000`.
+6.  **Run the development server:**
     
-
-### Frontend Setup (Coming Soon)
-
-The frontend part of the application is under development and will be available soon. The components will be designed using React and will integrate with the backend API.
-
-----------
-
-## API Endpoints
-
-### 1. **POST /api/items**
-
-Submit a found item.
-
-**Request Body**:
-
-```json
-{
-  "ItemType": "Passport",
-  "name": "John Doe's Passport",
-  "location": "Central Park",
-  "dateFound": "2025-01-06T12:00:00Z",
-  "description": "Red passport with a US visa.",
-  "contact": "123-456-7890",
-  "status": "Found"
-}
-
-```
-
-**Response**:
-
-```json
-{
-  "message": "Item submitted successfully"
-}
-
-```
-
-### 2. **GET /api/items**
-
-Retrieve all items.
-
-**Response**:
-
-```json
-[
-  {
-    "_id": "12345",
-    "ItemType": "Passport",
-    "name": "John Doe's Passport",
-    "location": "Central Park",
-    "dateFound": "2025-01-06T12:00:00Z",
-    "description": "Red passport with a US visa.",
-    "contact": "123-456-7890",
-    "status": "Found"
-  }
-]
-
-```
-
-### 3. **GET /api/items/search?name=<item_name>**
-
-Search for items by name.
-
-**Query Parameter**:
-
--   `name` (required): The name or part of the name to search for.
-
-**Response**:
-
-```json
-[
-  {
-    "_id": "12345",
-    "ItemType": "Passport",
-    "name": "John Doe's Passport",
-    "location": "Central Park",
-    "dateFound": "2025-01-06T12:00:00Z",
-    "description": "Red passport with a US visa.",
-    "contact": "123-456-7890",
-    "status": "Found"
-  }
-]
-
-```
-
-### 4. **PUT /api/items/:id/claim**
-
-Claim a found item.
-
-**Response**:
-
-```json
-{
-  "message": "Item claimed successfully"
-}
-
-```
-
-----------
-
-## Project Goals
-
-The primary goal of this project is to create a system that allows users to submit, search for, and claim lost items in an efficient and user-friendly manner. This will be achieved through a clean and scalable backend API.
-
-In the future, a frontend application will be developed to interact with this API, providing a complete web-based interface for users.
-
-----------
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE] file for details.
+    ```bash
+    python manage.py runserver
+    
+    ```
+    
+    Your application should now be running on `http://127.0.0.1:8000/`.
+    
 
 ----------
 
 ## Contributing
 
-We welcome contributions to improve the Lost and Found System. To contribute:
+Feel free to fork the repository and submit pull requests. Contributions, whether for bug fixes, features, or improvements, are always welcome.
 
-1.  Fork the repository.
-2.  Create a new branch (`git checkout -b feature/your-feature`).
-3.  Make your changes and commit them (`git commit -am 'Add new feature'`).
-4.  Push to the branch (`git push origin feature/your-feature`).
-5.  Open a pull request.
+----------
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
