@@ -36,7 +36,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         model = User  # The model to serialize
         fields = ('username', 'email', 'password', 'phone_number', 'address')
 
-    def create(self, validated_data: Dict[str, Any]) -> User:
+    def create(self, validated_data: Dict[str, Any]) -> Any:
         """
         Creates a new user instance with the provided validated data.
 
