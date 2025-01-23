@@ -5,7 +5,7 @@ class ItemSerializer(serializers.ModelSerializer):
     """
     Serializer for the Item model.
 
-    this serializer maps the Item model fields to JSON format and handles
+    This serializer maps the Item model fields to JSON format and handles
     validation, creation, and updates of Item instances.
     """
     class Meta:
@@ -14,6 +14,9 @@ class ItemSerializer(serializers.ModelSerializer):
             'id',
             'title',
             'description',
+            'location',
+            'status',
+            'claim_status',
             'created_at',
             'updated_at'
         ]
