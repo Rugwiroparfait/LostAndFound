@@ -19,8 +19,6 @@ class UserSerializer(serializers.ModelSerializer):
         read_only_fields = ('id',)
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
-
-
     """
     Serializer for user registration, including password handling.
 
@@ -30,7 +28,11 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
     Methods:
         create: Creates a new user instance with the provided validated data.
     """
+    username = serializers.CharField(write_only=True)
+    email = serializers.EmailField(write_only=True)
     password = serializers.CharField(write_only=True)
+    phone_number = serializers.CharField(write_only=True)
+    address = serializers.CharField(write_only=True)
 
     class Meta:
         model = User  # The model to serialize
