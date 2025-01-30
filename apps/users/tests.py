@@ -22,10 +22,12 @@ class UserTests(APITestCase):
         response = self.client.post(self.register_url, {'username': 'testuser', 'password': 'securepassword123', 'email': 'testuser@example.com'})
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertIn('username', response.data)
+    #user registering done successfully
     
     def test_login_user(self):
         response = self.client.post(self.login_url, {'username': 'existinguser', 'password': 'securepassword123'})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+    #login Tested successfully
 
     def test_profile_acess(self):
         self.client.login(username='existinguser', password='securepassword123')
