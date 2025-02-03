@@ -4,6 +4,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from .models import Item
 from .serializers import ItemSerializer
 from django.core.cache import cache
+from rest_framework.exceptions import PermissionDenied
 
 class ItemCreateView(generics.CreateAPIView):
     """
@@ -34,6 +35,11 @@ class ItemDeleteView(generics.DestroyAPIView):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+    def perform_destroy(self, instance):
+        if instance.user != self.request.user:
+            raise PermissionDenied("You are not allowed to delete this item.")
+        instance.delete()
 
 class ItemListView(generics.ListAPIView):
     """
