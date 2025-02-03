@@ -40,6 +40,7 @@ class ItemListView(generics.ListAPIView):
     Handles listing items with filtering, search, and caching
     Supports filtering by status and location.
     """
+    queryset = Item.objects.all()
     serializer_class = ItemSerializer
     permission_classes = [permissions.AllowAny]
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
