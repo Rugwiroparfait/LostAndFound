@@ -10,6 +10,10 @@ class Claim(models.Model):
     when the claim was created and last updated.
 
     Fields:
+        id: An AutoField that automatically increments for each new claim.
+        user_id: A ForeignKey to the user who made the claim.
+        item_id: A ForeignKey to the item being claimed.
+        status: A CharField to indicate the status of the claim.
         created_at: A DateTimeField that automatically sets the timestamp when 
                     the claim is created.
         updated_at: A DateTimeField that automatically updates the timestamp 
@@ -18,5 +22,9 @@ class Claim(models.Model):
     Inherits from:
         models.Model: Django's base class for all models.
     """
+    id = models.AutoField(primary_key=True)
+    user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    item_id = models.ForeignKey('items.Item', on_delete=models.CASCADE)
+    status = models.CharField(max_length=50)  # Increased max_length to 50
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

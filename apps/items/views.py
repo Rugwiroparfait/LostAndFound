@@ -40,6 +40,7 @@ class ItemDeleteView(generics.DestroyAPIView):
         if instance.user != self.request.user:
             raise PermissionDenied("You are not allowed to delete this item.")
         instance.delete()
+        return f"Item with ID {instance.id} has been deleted."
 
 class ItemListView(generics.ListAPIView):
     """
